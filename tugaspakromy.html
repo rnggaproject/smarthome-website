@@ -1,0 +1,59 @@
+# caesar_vigenere_demo.py
+# Implementasi Caesar Cipher (key = 3) dan Vigenère Cipher (key = TRKMANTAP)
+
+def caesar_encrypt(text, key):
+    """Encrypt text using Caesar cipher dengan shift tertentu."""
+    for ch in text:
+        if ch.isalpha():
+            base = 'A' if ch.isupper() else 'a'
+            shifted = chr((ord(ch) - ord(base) + key) % 26 + ord(base))
+            result.append(shifted)
+        else:
+            result.append(ch)
+    return ''.join(result)
+
+def vigenere_encrypt(text, key):
+    """Encrypt text menggunakan Vigenère cipher."""
+    result = []
+    key = ''.join([k for k in key if k.isalpha()]).upper()
+    ki = 0
+    for ch in text:
+        if ch.isalpha():
+            base = 'A' if ch.isupper() else 'a'
+            k = ord(key[ki % len(key)]) - ord('A')
+            shifted = chr((ord(ch) - ord(base) + k) % 26 + ord(base))
+            result.append(shifted)
+            ki += 1
+        else:
+            result.append(ch)
+    return ''.join(result)
+
+if _name_ == "_main_":
+    # Input dari user
+    nama_kamu = input("Masukkan nama kamu: ").upper()
+    nama_ibu  = input("Masukkan nama ibu : ").upper()
+    nama_ayah = input("Masukkan nama ayah: ").upper()
+
+    caesar_key = 8
+    vigenere_key = "TRKMANTAP"
+
+    # Proses Caesar
+    caesar_kamu = caesar_encrypt(nama_kamu, caesar_key)
+    caesar_ibu  = caesar_encrypt(nama_ibu, caesar_key)
+    caesar_ayah = caesar_encrypt(nama_ayah, caesar_key)
+
+    # Proses Vigenère
+    vigenere_kamu = vigenere_encrypt(nama_kamu, vigenere_key)
+    vigenere_ibu  = vigenere_encrypt(nama_ibu, vigenere_key)
+    vigenere_ayah = vigenere_encrypt(nama_ayah, vigenere_key)
+
+    # Output
+    print("\n=== CAESAR CIPHER (key=8) ===")
+    print("Nama Kamu:", caesar_kamu)
+    print("Nama Ibu :", caesar_ibu)
+    print("Nama Ayah:", caesar_ayah)
+
+    print("\n=== VIGENERE CIPHER (key=TRKMANTAP) ===")
+    print("Nama Kamu:", vigenere_kamu)
+    print("Nama Ibu :", vigenere_ibu)
+    print("Nama Ayah:", vigenere_ayah)
